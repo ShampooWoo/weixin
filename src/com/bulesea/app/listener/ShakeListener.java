@@ -8,94 +8,90 @@ import android.hardware.SensorManager;
 import android.util.Log;
 
 /**
- * һ������ֻ�ҡ�εļ�����
+ * 一个检测手机摇晃的监听器
  */
 public class ShakeListener implements SensorEventListener {
-	// �ٶ���ֵ����ҡ���ٶȴﵽ��ֵ���������
+	// 速度阈值，当摇晃速度达到这值后产生作用
 	private static final int SPEED_SHRESHOLD = 3000;
-	// ���μ���ʱ����
+	// 两次检测的时间间隔
 	private static final int UPTATE_INTERVAL_TIME = 70;
-	// ������������
+	// 传感器管理器
 	private SensorManager sensorManager;
-	// ������
+	// 传感器
 	private Sensor sensor;
-	// ������Ӧ������
+	// 重力感应监听器
 	private OnShakeListener onShakeListener;
-	// ������
+	// 上下文
 	private Context mContext;
-	// �ֻ���һ��λ��ʱ������Ӧ���
+	// 手机上一个位置时重力感应坐标
 	private float lastX;
 	private float lastY;
 	private float lastZ;
-	// �ϴμ��ʱ��
+	// 上次检测时间
 	private long lastUpdateTime;
 
-	// ������
+	// 构造器
 	public ShakeListener(Context c) {
-		// ��ü������
+		// 获得监听对象
 		mContext = c;
 		start();
 	}
 
-	// ��ʼ
+	// 开始
 	public void start() {
-		// ��ô�����������
-		sensorManager = (SensorManager) mContext
-				.getSystemService(Context.SENSOR_SERVICE);
+		// 获得传感器管理器
+		sensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
 		if (sensorManager != null) {
-			// �������������
+			// 获得重力传感器
 			sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 		}
-		// ע��
+		// 注册
 		if (sensor != null) {
-			sensorManager.registerListener(this, sensor,
-					SensorManager.SENSOR_DELAY_GAME);
+			sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME);
 		}
 
 	}
 
-	// ֹͣ���
+	// 停止检测
 	public void stop() {
 		sensorManager.unregisterListener(this);
 	}
 
-	// ����������Ӧ������
+	// 设置重力感应监听器
 	public void setOnShakeListener(OnShakeListener listener) {
 		onShakeListener = listener;
 	}
 
-	// ������Ӧ����Ӧ��ñ仯���
+	// 重力感应器感应获得变化数据
 	public void onSensorChanged(SensorEvent event) {
-		// ���ڼ��ʱ��
+		// 现在检测时间
 		long currentUpdateTime = System.currentTimeMillis();
-		// ���μ���ʱ����
+		// 两次检测的时间间隔
 		long timeInterval = currentUpdateTime - lastUpdateTime;
-		// �ж��Ƿ�ﵽ�˼��ʱ����
+		// 判断是否达到了检测时间间隔
 		if (timeInterval < UPTATE_INTERVAL_TIME)
 			return;
-		// ���ڵ�ʱ����lastʱ��
+		// 现在的时间变成last时间
 		lastUpdateTime = currentUpdateTime;
 
-		// ���x,y,z���
+		// 获得x,y,z坐标
 		float x = event.values[0];
 		float y = event.values[1];
 		float z = event.values[2];
 
-		// ���x,y,z�ı仯ֵ
+		// 获得x,y,z的变化值
 		float deltaX = x - lastX;
 		float deltaY = y - lastY;
 		float deltaZ = z - lastZ;
 
-		// �����ڵ������last���
+		// 将现在的坐标变成last坐标
 		lastX = x;
 		lastY = y;
 		lastZ = z;
 
-		double speed = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ
-				* deltaZ)
-				/ timeInterval * 10000;
+		double speed = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ) / timeInterval * 10000;
 		Log.v("thelog", "===========log===================");
-		// �ﵽ�ٶȷ�ֵ��������ʾ
+		// 达到速度阀值，发出提示
 		if (speed >= SPEED_SHRESHOLD) {
 			onShakeListener.onShake();
 		}
@@ -105,7 +101,7 @@ public class ShakeListener implements SensorEventListener {
 
 	}
 
-	// ҡ�μ���ӿ�
+	// 摇晃监听接口
 	public interface OnShakeListener {
 		public void onShake();
 	}

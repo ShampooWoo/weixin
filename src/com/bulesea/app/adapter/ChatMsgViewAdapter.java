@@ -4,8 +4,6 @@ package com.bulesea.app.adapter;
 import java.util.List;
 
 import com.bulesea.app.R;
-import com.bulesea.app.R.id;
-import com.bulesea.app.R.layout;
 import com.bulesea.app.domain.ChatMsgEntity;
 
 import android.content.Context;
@@ -49,7 +47,6 @@ public class ChatMsgViewAdapter extends BaseAdapter {
 	}
 
 	public int getItemViewType(int position) {
-		// TODO Auto-generated method stub
 		ChatMsgEntity entity = coll.get(position);
 
 		if (entity.getMsgType()) {
@@ -61,7 +58,6 @@ public class ChatMsgViewAdapter extends BaseAdapter {
 	}
 
 	public int getViewTypeCount() {
-		// TODO Auto-generated method stub
 		return 2;
 	}
 

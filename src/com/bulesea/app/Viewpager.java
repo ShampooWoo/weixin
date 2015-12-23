@@ -22,7 +22,7 @@ public class Viewpager extends Activity {
     /** Called when the activity is first created. */
 	private ViewPager mViewPager;	
 	private PagerTitleStrip mPagerTitleStrip;
-	private ImageView mPageImg;// ����ͼƬ
+	private ImageView mPageImg;// 动画图片
 	private int currIndex = 0;
 	private ImageView mPage0;
 	private ImageView mPage1;
@@ -58,7 +58,7 @@ public class Viewpager extends Activity {
         mPage8 = (ImageView)findViewById(R.id.page8);
         
         
-        //��Ҫ��ҳ��ʾ��Viewװ��������
+        //将要分页显示的View装入数组中
         LayoutInflater mLi = LayoutInflater.from(this);
         View view1 = mLi.inflate(R.layout.view1, null);
         View view2 = mLi.inflate(R.layout.view2, null);
@@ -70,7 +70,7 @@ public class Viewpager extends Activity {
         View view8 = mLi.inflate(R.layout.view8, null);
         View view9 = mLi.inflate(R.layout.view9, null);
         	    
-        //ÿ��ҳ���view���
+        //每个页面的view数据
         final ArrayList<View> views = new ArrayList<View>();
         views.add(view1);
         views.add(view2);
@@ -83,18 +83,18 @@ public class Viewpager extends Activity {
         views.add(view9);
         
         final ArrayList<String> titles = new ArrayList<String>();
-        titles.add("��");
-        titles.add("��");
-        titles.add("��");
-        titles.add("��");
-        titles.add("��");
-        titles.add("��");
-        titles.add("��");
-        titles.add("��");
+        titles.add("①");
+        titles.add("②");
+        titles.add("③");
+        titles.add("④");
+        titles.add("⑤");
+        titles.add("⑥");
+        titles.add("⑦");
+        titles.add("⑧");
         titles.add(" ");
         
         
-        //���ViewPager�����������
+        //填充ViewPager的数据适配器
         PagerAdapter mPagerAdapter = new PagerAdapter() {
 			
 			@Override
@@ -129,8 +129,8 @@ public class Viewpager extends Activity {
     
     public class MyOnPageChangeListener implements OnPageChangeListener {
 
-		//int one = offset * 2 + bmpW;// ҳ��1 -> ҳ��2 ƫ����
-		//int two = one * 2;// ҳ��1 -> ҳ��3 ƫ����
+		//int one = offset * 2 + bmpW;// 页卡1 -> 页卡2 偏移量
+		//int two = one * 2;// 页卡1 -> 页卡3 偏移量
     	//int move = 20;
 
 		@Override
@@ -229,7 +229,7 @@ public class Viewpager extends Activity {
 				break;
 			}
 			currIndex = arg0;
-			animation.setFillAfter(true);// True:ͼƬͣ�ڶ�������λ��
+			animation.setFillAfter(true);// True:图片停在动画结束位置
 			animation.setDuration(300);
 			//mPageImg.startAnimation(animation);
 		}

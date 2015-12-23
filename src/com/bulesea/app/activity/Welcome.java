@@ -1,34 +1,32 @@
 package com.bulesea.app.activity;
 
-
-import android.os.Bundle;
-
 import com.bulesea.app.R;
-import com.bulesea.app.R.layout;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.view.Menu;
+import android.os.Bundle;
 import android.view.View;
 
 public class Welcome extends Activity {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.welcome);
-    }
-    public void welcome_login(View v) {  
-      	Intent intent = new Intent();
-		intent.setClass(Welcome.this,Login.class);
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.welcome);
+	}
+
+	public void welcome_login(View v) {
+		Intent intent = new Intent();
+		intent.setClass(Welcome.this, Login.class);
 		startActivity(intent);
-		//this.finish();
-      }  
-    public void welcome_register(View v) {  
-      	Intent intent = new Intent();
-		intent.setClass(Welcome.this,MainWeixin.class);
+		// this.finish();
+	}
+
+	public void welcome_register(View v) {
+		Intent intent = new Intent();
+		intent.setClass(Welcome.this, MainWeixin.class);
 		startActivity(intent);
-		//this.finish();
-      }  
-   
+		// this.finish();
+	}
+
 }

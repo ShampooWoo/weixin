@@ -5,16 +5,12 @@ import java.util.Calendar;
 import java.util.List;
 
 import com.bulesea.app.R;
-import com.bulesea.app.R.id;
-import com.bulesea.app.R.layout;
 import com.bulesea.app.adapter.ChatMsgViewAdapter;
 import com.bulesea.app.domain.ChatMsgEntity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.LevelListDrawable;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -24,7 +20,8 @@ import android.widget.ListView;
 
 /**
  * 
- * @author geniuseoe2012 http://blog.csdn.net/geniuseoe2012
+ * @author geniuseoe2012 更多精彩，请关注我的CSDN博客 http://blog.csdn.net/geniuseoe2012
+ *         android开发交流群：200102476
  */
 public class ChatActivity extends Activity implements OnClickListener {
 	/** Called when the activity is first created. */
@@ -39,7 +36,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.chat_xiaohei);
-		// ����activityʱ���Զ����������
+		// 启动activity时不自动弹出软键盘
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		initView();
 
@@ -56,8 +53,8 @@ public class ChatActivity extends Activity implements OnClickListener {
 		mEditTextContent = (EditText) findViewById(R.id.et_sendmessage);
 	}
 
-	private String[] msgArray = new String[] { "�д���", "�У����أ�", "��Ҳ��", "���ϰ�", "�򰡣���Ŵ�",
-			"��tmզ���Ŵ��أ���������ͷ�ǣ�Cao�ġ������b", "2B������", "���....", };
+	private String[] msgArray = new String[] { "有大吗", "有！你呢？", "我也有", "那上吧", "打啊！你放大啊", "你tm咋不放大呢？留大抢人头那！Cao的。你个菜b",
+			"2B不解释", "尼滚....", };
 
 	private String[] dataArray = new String[] { "2012-09-01 18:00", "2012-09-01 18:10", "2012-09-01 18:11",
 			"2012-09-01 18:20", "2012-09-01 18:30", "2012-09-01 18:35", "2012-09-01 18:40", "2012-09-01 18:50" };
@@ -68,10 +65,10 @@ public class ChatActivity extends Activity implements OnClickListener {
 			ChatMsgEntity entity = new ChatMsgEntity();
 			entity.setDate(dataArray[i]);
 			if (i % 2 == 0) {
-				entity.setName("С��");
+				entity.setName("小黑");
 				entity.setMsgType(true);
 			} else {
-				entity.setName("����");
+				entity.setName("人马");
 				entity.setMsgType(false);
 			}
 
@@ -102,7 +99,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 		if (contString.length() > 0) {
 			ChatMsgEntity entity = new ChatMsgEntity();
 			entity.setDate(getDate());
-			entity.setName("����");
+			entity.setName("人马");
 			entity.setMsgType(false);
 			entity.setText(contString);
 
@@ -130,7 +127,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 		return sbBuffer.toString();
 	}
 
-	public void head_xiaohei(View v) { // ������ ���ذ�ť
+	public void head_xiaohei(View v) { // 标题栏 返回按钮
 		Intent intent = new Intent(ChatActivity.this, InfoXiaohei.class);
 		startActivity(intent);
 	}

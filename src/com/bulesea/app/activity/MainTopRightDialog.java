@@ -2,11 +2,8 @@ package com.bulesea.app.activity;
 
 
 import com.bulesea.app.R;
-import com.bulesea.app.R.id;
-import com.bulesea.app.R.layout;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,9 +24,8 @@ public class MainTopRightDialog extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getApplicationContext(), "��ʾ����������ⲿ�رմ��ڣ�", 
-						Toast.LENGTH_SHORT).show();	
+				Toast.makeText(getApplicationContext(), "提示：点击窗口外部关闭窗口！", 
+						Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
@@ -39,13 +35,13 @@ public class MainTopRightDialog extends Activity {
 		finish();
 		return true;
 	}
-	/*
+ 
 	public void exitbutton1(View v) {  
     	this.finish();    	
       }  
 	public void exitbutton0(View v) {  
     	this.finish();
-    	MainWeixin.instance.finish();//�ر�Main ���Activity
+    	MainWeixin.instance.finish();//关闭Main 这个Activity
       }  
-	*/
+	 
 }
